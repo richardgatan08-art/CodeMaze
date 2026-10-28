@@ -1,0 +1,115 @@
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600;700&family=Inter:wght@400;600&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', 'Fira Code', monospace;
+}
+
+body {
+    background-color: #050b07;
+    color: #e0ffe8;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    position: relative;
+    overflow: hidden;
+}
+
+#matrixCanvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1;
+    opacity: 0.3;
+}
+
+.container {
+    background-color: rgba(10, 25, 16, 0.85);
+    border-radius: 20px;
+    border: 1px solid rgba(0, 255, 102, 0.3);
+    box-shadow: 0 0 30px rgba(0, 255, 102, 0.25);
+    backdrop-filter: blur(10px);
+    position: relative;
+    overflow: hidden;
+    width: 768px;
+    max-width: 100%;
+    min-height: 480px;
+}
+
+.container form {
+    background: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 0 40px;
+    height: 100%;
+}
+
+.container h1 {
+    color: #00ff66;
+    text-shadow: 0 0 10px rgba(0, 255, 102, 0.4);
+    margin-bottom: 10px;
+}
+
+.container input {
+    background-color: rgba(0, 20, 10, 0.7) !important;
+    border: 1px solid rgba(0, 255, 102, 0.3) !important;
+    color: #e0ffe8 !important;
+    margin: 8px 0;
+    padding: 12px 15px;
+    font-size: 13px;
+    border-radius: 8px;
+    width: 100%;
+    outline: none;
+}
+
+.container input:focus {
+    border-color: #00ff66 !important;
+    box-shadow: 0 0 10px rgba(0, 255, 102, 0.4);
+}
+
+.input, .container button {
+    background-color: #00ff66 !important;
+    color: #000 !important;
+    font-weight: 700;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 45px;
+    margin-top: 15px;
+    cursor: pointer;
+    box-shadow: 0 0 15px rgba(0, 255, 102, 0.4);
+    transition: all 0.3s ease;
+}
+
+.input:hover, .container button:hover {
+    background-color: #00cc52 !important;
+    box-shadow: 0 0 22px rgba(0, 255, 102, 0.7);
+}
+
+.toggle-container {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 50%;
+    height: 100%;
+    overflow: hidden;
+    transition: all 0.6s ease-in-out;
+    border-radius: 100px 0 0 100px;
+    z-index: 1000;
+}
+
+.toggle {
+    background: linear-gradient(135deg, #041208, #003816);
+    border-left: 1px solid rgba(0, 255, 102, 0.4);
+    color: #fff;
+    height: 100%;
+    position: relative;
+    left: -100%;
+    width: 200%;
+}

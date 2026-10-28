@@ -1,0 +1,566 @@
+  * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        html,
+        body {
+            width: 100%;
+            height: 100vh;
+            height: 100dvh;
+            overflow: hidden;
+        }
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            font-family: 'Inter', sans-serif;
+            padding: clamp(0.8rem, 3vh, 2.5rem) clamp(1rem, 4vw, 3rem);
+            color: #f5f0eb;
+            position: relative;
+            background-color: #0a0806;
+        }
+        .bg-stack {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+        }
+        .bg-slide {
+            position: absolute;
+            inset: 0;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+            animation: bgFloat 30s infinite alternate ease-in-out;
+        }
+        .bg-slide.active {
+            opacity: 1;
+        }
+        @keyframes bgFloat {
+            0% {
+                transform: scale(1) translate(0, 0) rotate(0deg);
+            }
+            20% {
+                transform: scale(1.03) translate(-1%, 0.5%) rotate(0.3deg);
+            }
+            40% {
+                transform: scale(1.06) translate(0.5%, -0.5%) rotate(-0.2deg);
+            }
+            60% {
+                transform: scale(1.02) translate(1%, 0.3%) rotate(0.1deg);
+            }
+            80% {
+                transform: scale(1.05) translate(-0.5%, 1%) rotate(-0.3deg);
+            }
+            100% {
+                transform: scale(1) translate(0.4%, 0.3%) rotate(0deg);
+            }
+        }
+        .bg-vignette {
+            position: fixed;
+            inset: 0;
+            background: radial-gradient(ellipse at 30% 50%, rgba(5, 4, 3, 0.35) 0%, rgba(3, 2, 2, 0.82) 100%);
+            z-index: 1;
+            pointer-events: none;
+        }
+        .container {
+            width: 100%;
+            height: 100%;
+            max-width: 1200px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            position: relative;
+            z-index: 1;
+            overflow: hidden;
+        }
+        .story {
+            max-width: 620px;
+            width: 100%;
+            max-height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            text-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
+            position: relative;
+        }
+        .chapter-counter {
+            position: absolute;
+            top: 0;
+            left: 0;
+            font-size: clamp(0.65rem, 1.2vh, 0.85rem);
+            font-weight: 500;
+            letter-spacing: 0.08em;
+            color: #cbb8a8;
+            background: rgba(30, 22, 16, 0.5);
+            padding: 0.2rem 0.9rem 0.2rem 0.7rem;
+            border-radius: 30px;
+            border: 1px solid rgba(255, 245, 235, 0.12);
+            backdrop-filter: blur(4px);
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.25);
+            opacity: 0;
+            animation: fadeSlide 0.5s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+            animation-delay: 0.2s;
+            pointer-events: none;
+            user-select: none;
+            z-index: 5;
+            white-space: nowrap;
+        }
+        .chapter-counter .num {
+            color: #f5d9b8;
+            font-weight: 700;
+        }
+        .story-content {
+            padding-top: clamp(2rem, 4.5vh, 3.2rem);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .line {
+            opacity: 0;
+            animation: fadeSlide 0.7s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+            margin-bottom: clamp(0.05rem, 0.6vh, 0.25rem);
+            line-height: clamp(1.2, 1.4vh, 1.5);
+        }
+        @keyframes fadeSlide {
+            0% {
+                opacity: 0;
+                transform: translateX(-30px) scale(0.97);
+            }
+            100% {
+                opacity: 1;
+                transform: translateX(0) scale(1);
+            }
+        }
+        .title {
+            font-size: clamp(1.3rem, 3.8vh, 2.6rem);
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            line-height: 1.1;
+            margin-bottom: clamp(0.2rem, 1vh, 0.8rem);
+            color: #ffffff;
+        }
+        .subtitle {
+            font-size: clamp(1rem, 2.4vh, 1.6rem);
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            color: #f5d9b8;
+            margin-bottom: clamp(0.2rem, 1vh, 0.8rem);
+        }
+        .body-text {
+            font-size: clamp(1.50rem, 1.6vh, 1.05rem);
+            font-weight: 400;
+            color: #f0e8e0;
+        }
+        .emphasis {
+            font-size: clamp(1.1rem, 2.8vh, 1.8rem);
+            font-weight: 600;
+            font-style: italic;
+            color: #f5d9b8;
+            margin-top: clamp(0.1rem, 0.5vh, 0.4rem);
+            padding-left: 0.5rem;
+            border-left: 3px solid #f5d9b8;
+        }
+        .emphasis+.emphasis {
+            margin-top: -0.2rem;
+        }
+        .spacer {
+            height: clamp(0.2rem, 1vh, 0.8rem);
+        }
+        .sign-wrapper {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+            margin: clamp(0.2rem, 1vh, 0.6rem) 0;
+        }
+        .sign-board {
+            position: relative;
+            background: #4a3520;
+            background-image: repeating-linear-gradient(90deg, rgba(60, 40, 25, 0.3) 0px, rgba(60, 40, 25, 0.3) 2px, transparent 2px, transparent 6px);
+            border: 8px solid #3d2a18;
+            border-image: repeating-linear-gradient(45deg, #5a3f28 0px, #5a3f28 4px, #3d2a18 4px, #3d2a18 8px) 8;
+            border-radius: 6px 6px 12px 12px;
+            padding: clamp(0.6rem, 2vh, 1.2rem) clamp(1.2rem, 3vw, 2.4rem);
+            text-align: center;
+            min-width: clamp(140px, 30vw, 280px);
+            box-shadow: 0 6px 30px rgba(0, 0, 0, 0.6), inset 0 2px 10px rgba(255, 215, 140, 0.15);
+            transform: perspective(600px) rotateX(2deg) rotateY(-2deg);
+            transition: transform 0.4s ease;
+        }
+        .sign-board:hover {
+            transform: perspective(600px) rotateX(0deg) rotateY(0deg) scale(1.02);
+        }
+        .sign-board .sign-text {
+            font-family: 'Inter', serif;
+            font-weight: 800;
+            font-size: clamp(1.6rem, 4vh, 2.8rem);
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: #f5d9b8;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8), 0 0 20px rgba(180, 120, 70, 0.3);
+            line-height: 1.2;
+        }
+        .sign-board .sign-sub {
+            font-size: clamp(0.5rem, 1vh, 0.7rem);
+            letter-spacing: 0.2em;
+            color: #a08060;
+            margin-top: 0.2rem;
+            text-transform: uppercase;
+            border-top: 1px solid rgba(160, 128, 96, 0.3);
+            padding-top: 0.3rem;
+        }
+        .image-box-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: clamp(0.3rem, 1vw, 0.6rem);
+            margin-top: clamp(0.3rem, 1vh, 0.8rem);
+            width: 100%;
+        }
+        .image-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+            background: rgba(20, 15, 12, 0.75);
+            backdrop-filter: blur(4px);
+            border: 2px solid rgba(245, 215, 184, 0.2);
+            border-radius: 10px;
+            padding: 0;
+            text-align: center;
+            font-weight: 1000;
+            font-size: clamp(0.55rem, 1.1vh, 0.75rem);
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            color: #f5d9b8;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            cursor: default;
+            line-height: 1.2;
+            min-height: clamp(70px, 11vh, 100px);
+            aspect-ratio: 1 / 1.1;
+        }
+        .image-box::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(145deg, rgba(255, 215, 184, 0.05) 0%, transparent 60%);
+            pointer-events: none;
+            border-radius: 10px;
+        }
+        .image-box:hover {
+            transform: translateY(-3px) scale(1.03);
+            border-color: rgba(245, 215, 184, 0.8);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+            background: rgba(40, 30, 24, 0.9);
+        }
+        .image-box .icon-img {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 0;
+            flex-shrink: 0;
+            filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.4));
+            display: block;
+            z-index: 0;
+        }
+        .image-box .label {
+            position: relative;
+            z-index: 2;
+            font-size: clamp(0.6rem, 1.2vh, 0.8rem);
+            line-height: 1.1;
+            white-space: nowrap;
+            flex-shrink: 1;
+            min-width: 0;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            margin-top: auto;
+            width: 100%;
+            padding: clamp(0.2rem, 0.6vh, 0.4rem) clamp(0.2rem, 0.5vw, 0.4rem);
+            background: linear-gradient(180deg, rgba(10, 8, 6, 0) 0%, rgba(10, 8, 6, 0.85) 100%);
+            color: #f5d9b8;
+            letter-spacing: 0.06em;
+            text-shadow: 0 1px 4px rgba(0, 0, 0, 0.8);
+        }
+        .code-block {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 0.8rem 1rem;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: clamp(0.7rem, 1.4vh, 0.9rem);
+            color: #a0f0a0;
+            white-space: pre-wrap;
+            word-break: break-all;
+            border-left: 4px solid #f5d9b8;
+            margin: 0.4rem 0;
+            line-height: 1.5;
+            overflow-x: auto;
+        }
+        .nav-controls {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 0.6rem;
+            margin-top: clamp(0.6rem, 2vh, 1.6rem);
+            padding-top: clamp(0.4rem, 1vh, 0.8rem);
+            border-top: 1px solid rgba(255, 245, 235, 0.15);
+            flex-wrap: wrap;
+        }
+        .nav-btn,
+        .nav-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: clamp(36px, 5vh, 48px);
+            height: clamp(36px, 5vh, 48px);
+            background: rgba(255, 255, 255, 0.04);
+            border: 1.5px solid rgba(255, 245, 235, 0.3);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(4px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            padding: 0;
+            text-decoration: none;
+            color: inherit;
+            flex-shrink: 0;
+            position: relative;
+        }
+        .nav-btn:hover:not(:disabled),
+        .nav-link:hover {
+            background: #f5f0eb;
+            border-color: #f5f0eb;
+            box-shadow: 0 8px 32px rgba(245, 240, 235, 0.2);
+            transform: scale(1.05);
+        }
+        .nav-btn:active:not(:disabled),
+        .nav-link:active {
+            transform: scale(0.92);
+        }
+        .nav-btn:disabled {
+            opacity: 0.2;
+            cursor: not-allowed;
+            transform: none;
+            pointer-events: none;
+        }
+        .nav-btn svg,
+        .nav-link svg {
+            width: clamp(18px, 2.5vh, 24px);
+            height: clamp(18px, 2.5vh, 24px);
+            fill: none;
+            stroke: #f5f0eb;
+            stroke-width: 2.5;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            transition: stroke 0.3s ease, transform 0.3s ease;
+        }
+        .nav-btn:hover:not(:disabled) svg,
+        .nav-link:hover svg {
+            stroke: #1e1713;
+        }
+        .nav-btn.next:hover:not(:disabled) svg {
+            transform: translateX(3px);
+        }
+        .nav-btn.prev:hover:not(:disabled) svg {
+            transform: translateX(-3px);
+        }
+        .skip-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: clamp(0.75rem, 1.4vh, 1rem);
+            font-weight: 600;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            color: #f5d9b8;
+            text-decoration: none;
+            padding: 0.2rem 1.2rem;
+            border-radius: 30px;
+            border: 1.5px solid rgba(245, 215, 184, 0.3);
+            background: rgba(30, 22, 16, 0.5);
+            backdrop-filter: blur(4px);
+            transition: all 0.3s ease;
+            flex-shrink: 0;
+            white-space: nowrap;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+            min-height: clamp(32px, 4.5vh, 44px);
+            min-width: clamp(60px, 8vw, 100px);
+        }
+        .skip-link:hover {
+            background: #f5d9b8;
+            border-color: #f5d9b8;
+            color: #1e1713;
+            box-shadow: 0 8px 32px rgba(245, 215, 184, 0.25);
+            transform: scale(1.05);
+        }
+        .skip-link:active {
+            transform: scale(0.95);
+        }
+        .skip-link svg {
+            width: clamp(16px, 2vh, 20px);
+            height: clamp(16px, 2vh, 20px);
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 2.5;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            margin-right: 0.3rem;
+        }
+        .nav-spacer {
+            flex: 1;
+            min-width: 0.3rem;
+        }
+        @media (max-width: 768px) {
+            body {
+                padding: clamp(0.5rem, 2vh, 1.2rem);
+                justify-content: center;
+                align-items: center;
+            }
+            .container {
+                justify-content: center;
+                align-items: center;
+            }
+            .story {
+                max-width: 100%;
+                text-align: left;
+            }
+            .story-content {
+                padding-top: clamp(1.8rem, 4vh, 2.8rem);
+            }
+            .chapter-counter {
+                font-size: 0.6rem;
+                padding: 0.15rem 0.6rem 0.15rem 0.5rem;
+            }
+            .image-box-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 0.4rem;
+            }
+            .nav-controls {
+                gap: 0.4rem;
+            }
+            .skip-link {
+                font-size: 0.65rem;
+                padding: 0.15rem 0.8rem;
+                min-width: 50px;
+                min-height: 28px;
+            }
+            .skip-link svg {
+                width: 14px;
+                height: 14px;
+                margin-right: 0.15rem;
+            }
+        }
+        @media (max-width: 480px) {
+            body {
+                padding: 0.5rem;
+            }
+            .story-content {
+                padding-top: clamp(1.5rem, 3.5vh, 2.2rem);
+            }
+            .chapter-counter {
+                font-size: 0.5rem;
+                padding: 0.1rem 0.5rem 0.1rem 0.4rem;
+                border-radius: 20px;
+            }
+            .image-box-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 0.3rem;
+            }
+            .image-box {
+                border-radius: 8px;
+            }
+            .nav-controls {
+                gap: 0.3rem;
+            }
+            .skip-link {
+                font-size: 0.55rem;
+                padding: 0.1rem 0.6rem;
+                min-width: 40px;
+                min-height: 24px;
+            }
+            .skip-link svg {
+                width: 12px;
+                height: 12px;
+                margin-right: 0.1rem;
+            }
+        }
+        @media (max-height: 600px) {
+            body {
+                padding: 0.4rem 1rem;
+            }
+            .story-content {
+                padding-top: clamp(1.2rem, 3vh, 2rem);
+            }
+            .chapter-counter {
+                font-size: 0.55rem;
+                padding: 0.1rem 0.5rem 0.1rem 0.4rem;
+            }
+            .spacer {
+                height: 0.15rem;
+            }
+            .line {
+                margin-bottom: 0;
+                line-height: 1.2;
+            }
+            .title {
+                font-size: 1.2rem;
+                margin-bottom: 0.2rem;
+            }
+            .subtitle {
+                font-size: 0.9rem;
+                margin-bottom: 0.2rem;
+            }
+            .body-text {
+                font-size: 0.75rem;
+            }
+            .sign-board {
+                padding: 0.4rem 0.8rem;
+                border-width: 4px;
+            }
+            .sign-board .sign-text {
+                font-size: 1.4rem;
+            }
+            .image-box {
+                min-height: clamp(48px, 9vh, 70px);
+            }
+            .image-box .icon-img {
+                width: 100%;
+                height: 100%;
+            }
+            .image-box-grid {
+                gap: 0.3rem;
+            }
+            .code-block {
+                font-size: 0.65rem;
+                padding: 0.4rem 0.6rem;
+            }
+            .nav-btn,
+            .nav-link {
+                width: clamp(28px, 4vh, 36px);
+                height: clamp(28px, 4vh, 36px);
+            }
+            .nav-btn svg,
+            .nav-link svg {
+                width: clamp(14px, 2vh, 18px);
+                height: clamp(14px, 2vh, 18px);
+            }
+            .skip-link {
+                font-size: 0.6rem;
+                padding: 0.1rem 0.7rem;
+                min-width: 44px;
+                min-height: 22px;
+            }
+            .skip-link svg {
+                width: 12px;
+                height: 12px;
+                margin-right: 0.15rem;
+            }
+        }

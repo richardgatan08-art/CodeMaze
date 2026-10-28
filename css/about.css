@@ -1,0 +1,120 @@
+body {
+      min-height: 100vh;
+      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364, #1fd1d1, #2ee6c6);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+.instructions {
+    max-width: 650px;
+    margin: 40px auto;
+    padding: 25px 30px;
+    background: linear-gradient(145deg, #1b1f3b, #11152b);
+    border-radius: 16px;
+    box-shadow: 0 0 25px rgba(0, 255, 255, 0.15);
+    border: 1px solid rgba(0, 255, 255, 0.2);
+    color: #e8e8ff;
+    animation: fadeInUp 0.8s ease;
+    position: relative;
+}
+
+.back-button {
+    position: absolute;
+    top: 15px;
+    left: 10px;
+    padding: 8px 14px;
+    background: rgba(0, 247, 255, 0.1);
+    color: rgb(255, 248, 248);
+    border: 1px solid #00f7ff;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.back-button:hover {
+    background: #00f7ff;
+    color: #11152b;
+    box-shadow: 0 0 10px #00f7ff, 0 0 20px #00f7ff;
+}
+
+
+.instructions h3 {
+    text-align: center;
+    color: #00f7ff;
+    font-size: 1.4rem;
+    letter-spacing: 1px;
+    margin-bottom: 5px;
+    text-shadow: 0 0 10px rgba(0, 247, 255, 0.6);
+}
+
+.instructions .subtitle {
+    text-align: center;
+    font-size: 0.9rem;
+    color: #ffcc00;
+    margin-bottom: 20px;
+}
+
+
+.instructions ul {
+    list-style: none;
+    padding: 0;
+}
+
+.instructions ul li {
+    padding: 10px 14px;
+    margin-bottom: 10px;
+    background: rgba(255, 255, 255, 0.05);
+    border-left: 4px solid #00f7ff;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.instructions ul li:hover {
+    transform: translateX(6px);
+    background: rgba(0, 247, 255, 0.12);
+}
+
+.instructions strong {
+    color: #ffffff;
+}
+
+.danger {
+    color: #ff4d4d;
+    font-weight: bold;
+}
+
+.warning {
+    color: #ffae00;
+    font-weight: bold;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 600px) {
+    .instructions {
+        padding: 20px;
+        font-size: 0.9rem;
+    }
+
+    .instructions h3 {
+        font-size: 1.2rem;
+    }
+
+    .back-button {
+        top: 10px;
+        left: 10px;
+        padding: 6px 10px;
+    }
+}
